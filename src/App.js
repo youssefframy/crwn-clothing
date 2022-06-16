@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Switch, Route } from 'react-router-dom'; 
+import { Switch, Route, Redirect} from 'react-router-dom'; 
 import { connect } from 'react-redux';
 
 import HomePage from './pages/homepage/homepage.component'
@@ -15,12 +15,16 @@ function App() {
     <Header />
     <Switch>
       <Route exact path='/' component={HomePage} />
-      <Route exact path='/shop' component={ShopPage} />
+      <Route path='/shop' component={ShopPage} />
       <Route exact path='/signIn' component={SignInAndSignUpPage} />
     </Switch>
     </div>
   );
 }
+
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser
+})
 
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
